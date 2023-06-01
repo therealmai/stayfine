@@ -32,7 +32,7 @@ const UserMenu = () => {
           Stayfine your home
         </div>
         <div
-          onClick={(toggleOpen)}
+          onClick={toggleOpen}
           className="
                 p-4
                 md: py-1
@@ -69,12 +69,12 @@ const UserMenu = () => {
                 top-12
                 text-sm"
         >
-            <div className="flex flex-col cursor-pointer">
-                <>
-                <MenuItem onClick={() => {}} label="Log in"/>
-                <MenuItem onClick={() => {}} label="Sign up"/>
-                </>
-            </div>
+          <div className="flex flex-col cursor-pointer">
+            <>
+              <MenuItem onClick={() => {}} label="Log in" />
+              <MenuItem onClick={() => {}} label="Sign up" />
+            </>
+          </div>
         </div>
       )}
     </div>
