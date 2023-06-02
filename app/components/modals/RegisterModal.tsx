@@ -2,17 +2,22 @@
 
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
+
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
+
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import useRegisterModal from "@/app/hooks/useRegisterModal";
+
 import Modal from "./Modal";
+import Input from "../inputs/Input";
 import Heading from "../Heading";
-import Input from "../inputs/Input"
+import Button from "../Button";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -26,6 +31,7 @@ const RegisterModal = () => {
       password: "",
     },
   });
+
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -43,9 +49,13 @@ const RegisterModal = () => {
       });
   };
 
+  const onToggle = useCallback(() => {
+    registerModal.onClose();
+  }, [registerModal]);
+  
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome to Stayfine" subtitle="Create an account" />
+      <Heading title="Welcome to Airbnb" subtitle="Create an account!" />
       <Input
         id="email"
         label="Email"
@@ -54,7 +64,7 @@ const RegisterModal = () => {
         errors={errors}
         required
       />
-       <Input
+      <Input
         id="name"
         label="Name"
         disabled={isLoading}
@@ -62,15 +72,44 @@ const RegisterModal = () => {
         errors={errors}
         required
       />
-       <Input
+      <Input
         id="password"
-        type="password"
         label="Password"
+        type="password"
         disabled={isLoading}
         register={register}
         errors={errors}
         required
       />
+    </div>
+  );
+
+  const footerContent = (
+    <div className="flex flex-col gap-4 mt-3">
+      <hr />
+      <div
+        className="
+          text-neutral-500 
+          text-center 
+          mt-4 
+          font-light
+        "
+      >
+        <p>
+          Already have an account?
+          <span
+            onClick={onToggle}
+            className="
+              text-neutral-800
+              cursor-pointer 
+              hover:underline
+            "
+          >
+            {" "}
+            Log in
+          </span>
+        </p>
+      </div>
     </div>
   );
 
@@ -83,6 +122,7 @@ const RegisterModal = () => {
       onClose={registerModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
+      footer={footerContent}
     />
   );
 };
