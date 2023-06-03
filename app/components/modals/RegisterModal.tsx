@@ -14,6 +14,7 @@ import Modal from "./Modal";
 import Input from "../inputs/Input";
 import Heading from "../Heading";
 import Button from "../Button";
+import toast from "react-hot-toast";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -42,7 +43,7 @@ const RegisterModal = () => {
         registerModal.onClose();
       })
       .catch((error) => {
-        console.log(error);
+        toast.error('Something Went Wrong');
       })
       .finally(() => {
         setIsLoading(false);
@@ -52,7 +53,7 @@ const RegisterModal = () => {
   const onToggle = useCallback(() => {
     registerModal.onClose();
   }, [registerModal]);
-  
+
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading title="Welcome to Airbnb" subtitle="Create an account!" />
@@ -87,6 +88,18 @@ const RegisterModal = () => {
   const footerContent = (
     <div className="flex flex-col gap-4 mt-3">
       <hr />
+      <Button 
+        outline 
+        label="Continue with Google"
+        icon={FcGoogle}
+        onClick={() => {}} 
+      />
+      <Button 
+        outline 
+        label="Continue with Github"
+        icon={AiFillGithub}
+        onClick={() => {}}
+      />
       <div
         className="
           text-neutral-500 
